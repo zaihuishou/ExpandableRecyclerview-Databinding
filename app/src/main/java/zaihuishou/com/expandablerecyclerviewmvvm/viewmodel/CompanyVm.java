@@ -1,7 +1,8 @@
 package zaihuishou.com.expandablerecyclerviewmvvm.viewmodel;
 
-import android.databinding.BaseObservable;
 import android.databinding.ObservableField;
+
+import com.zaihuishou.databinding.expandablerecycleradapter.Observable.BaseExpandableObservable;
 
 /**
  * 创建者: zhiqiang(谭志强)
@@ -10,7 +11,7 @@ import android.databinding.ObservableField;
  * 描述:
  */
 
-public class CompanyVm extends BaseObservable {
+public class CompanyVm extends BaseExpandableObservable {
 
     public ObservableField<String> text;
 

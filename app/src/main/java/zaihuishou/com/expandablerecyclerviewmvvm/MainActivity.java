@@ -10,8 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 
-import com.zaihuishou.databinding.expandablerecycleradapter.adapter.BaseExpandableAdapter2;
-import com.zaihuishou.databinding.expandablerecycleradapter.viewholder.BindingViewHolder;
+import com.zaihuishou.databinding.expandablerecycleradapter.adapter.BaseExpandableAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding mainBinding;
     private MainViewModel mMainViewModel;
-    private BaseExpandableAdapter2 mAdapter;
+    private BaseExpandableAdapter mAdapter;
     private List<Object> mList;
 
     @Override
@@ -64,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
                 mList.add(department);
             }
         }
-        mAdapter = new BaseExpandableAdapter2(this, mList) {
+        mAdapter = new BaseExpandableAdapter(this, mList) {
             @NonNull
             @Override
             public int getItemView(int type) {
@@ -76,19 +75,27 @@ public class MainActivity extends AppCompatActivity {
                 }
                 return -1;
             }
+//
+//            @Override
+//            public void onBindItemViewHolder(BindingViewHolder holder, Object o, int index) {
+//                if (o instanceof CompanyVm) {
+//                    CompanyVm companyVm = (CompanyVm) o;
+//                    holder.getBinding().setVariable(zaihuishou.com.expandablerecyclerviewmvvm.BR.vm, companyVm);
+//                } else if (o instanceof Department) {
+//                    Department department = (Department) o;
+//                    holder.getBinding().setVariable(zaihuishou.com.expandablerecyclerviewmvvm.BR.vm, department);
+//                }
+//                holder.getBinding().executePendingBindings();
+//            }
 
             @Override
-            public void onBindItemViewHolder(BindingViewHolder holder, Object o, int index) {
-                if (o instanceof CompanyVm) {
-                    CompanyVm companyVm = (CompanyVm) o;
-                    holder.getBinding().setVariable(zaihuishou.com.expandablerecyclerviewmvvm.BR.vm, companyVm);
-                } else if (o instanceof Department) {
-                    Department department = (Department) o;
-                    holder.getBinding().setVariable(BR.vm, department);
-                }
-                holder.getBinding().executePendingBindings();
+            public int getVariable(Object o, int index) {
+                if (o instanceof CompanyVm)
+                    return BR.companyvm;
+                else if(o instanceof Department)
+                    return BR.vm;
+                return -1;
             }
-
 
             @Override
             public int getItemViewType(Object t) {

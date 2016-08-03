@@ -6,7 +6,7 @@
         <import type="android.view.View"/>
 
         <variable
-            name="vm"
+            name="companyvm"
             type="zaihuishou.com.expandablerecyclerviewmvvm.viewmodel.CompanyVm"/>
 
     </data>
@@ -18,7 +18,7 @@
         android:gravity="center_vertical"
         android:orientation="vertical"
         android:paddingLeft="16dp"
-        android:text="@{vm.text}">
+        android:text="@{companyvm.text}">
 
     </TextView>
 </layout>
