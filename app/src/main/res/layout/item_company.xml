@@ -16,6 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:gravity="center_vertical"
+        android:onClick="@{()->companyvm.onTextClick()}"
         android:orientation="vertical"
         android:paddingLeft="16dp"
         android:text="@{companyvm.text}">

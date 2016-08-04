@@ -23,16 +23,14 @@ public abstract class BaseExpandableObservable extends BaseObservable {
      */
     public ObservableBoolean isExpand;
 
-    private ItemListExpandCollapseListener mItemListExpandCollapseListener;
+    protected ItemListExpandCollapseListener mItemListExpandCollapseListener;
 
     public BaseExpandableObservable() {
         mChildList = new ObservableArrayList<>();
         isExpand = new ObservableBoolean(false);
     }
 
-    public List<Object> getChildList() {
-        return mChildList.subList(0, mChildList.size());
-    }
+    public abstract ObservableArrayList<Object> getChildList();
 
     public void setChildList(List<Object> childList) {
         mChildList.addAll(childList);
@@ -62,16 +60,27 @@ public abstract class BaseExpandableObservable extends BaseObservable {
         /**
          * Called when a list item is expanded.
          *
-         * @param position The index of the item in the list being expanded
+         * @param baseExpandableObservable The item in the list being expanded
          */
-        void onItemListExpanded(int position);
+        void onItemListExpanded(BaseExpandableObservable baseExpandableObservable);
 
         /**
          * Called when a list item is collapsed.
          *
-         * @param position The index of the item in the list being collapsed
+         * @param baseExpandableObservable The item in the list being collapsed
          */
-        void onItemListCollapsed(int position);
+        void onItemListCollapsed(BaseExpandableObservable baseExpandableObservable);
 
     }
+
+    /**
+     * Callback triggered when expansion state is changed, but not during
+     * initialization.
+     * <p>
+     * Useful for implementing animations on expansion.
+     *
+     * @param expanded true if view is expanded before expansion is toggled,
+     *                 false if not
+     */
+    public abstract void onExpansionToggled(boolean expanded);
 }

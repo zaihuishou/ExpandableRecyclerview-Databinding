@@ -54,8 +54,9 @@ public class MainActivity extends AppCompatActivity {
         mList = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             if (i % 2 == 0) {
-                CompanyVm companyVm = new CompanyVm();
+                CompanyVm companyVm = new CompanyVm(this);
                 companyVm.setText("公司:" + i + "肯定房价啊矿大积分发");
+                companyVm.mChildList.add(new Department("dfdafdafadf"));
                 mList.add(companyVm);
             } else {
                 Department department = new Department();
@@ -66,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
         mAdapter = new BaseExpandableAdapter(this, mList) {
             @NonNull
             @Override
-            public int getItemView(int type) {
+            public int getItemLayout(int type) {
                 switch (type) {
                     case 1:
                         return R.layout.item_company;

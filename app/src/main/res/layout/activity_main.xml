@@ -34,6 +34,7 @@
         </android.support.design.widget.AppBarLayout>
 
         <android.support.v7.widget.RecyclerView
+            android:layout_marginTop="?android:actionBarSize"
             android:id="@+id/list_data"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>

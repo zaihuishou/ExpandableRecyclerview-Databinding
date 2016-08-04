@@ -14,6 +14,10 @@ public class Department extends BaseObservable {
 
     public ObservableField<String> name;
 
+    public Department(String name) {
+        this.name = new ObservableField<>(name);
+    }
+
     public Department() {
         this.name = new ObservableField<>();
     }
