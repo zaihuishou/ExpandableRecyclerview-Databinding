@@ -9,7 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
-import com.zaihuishou.databinding.expandablerecycleradapter.Observable.BaseExpandableObservable;
+import com.zaihuishou.databinding.expandablerecycleradapter.observable.BaseExpandableObservable;
 import com.zaihuishou.databinding.expandablerecycleradapter.util.AdapterItemUtil;
 import com.zaihuishou.databinding.expandablerecycleradapter.viewholder.BindingViewHolder;
 

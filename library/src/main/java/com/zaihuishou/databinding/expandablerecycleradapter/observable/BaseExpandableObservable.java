@@ -1,4 +1,4 @@
-package com.zaihuishou.databinding.expandablerecycleradapter.Observable;
+package com.zaihuishou.databinding.expandablerecycleradapter.observable;
 
 import android.databinding.BaseObservable;
 import android.databinding.ObservableArrayList;

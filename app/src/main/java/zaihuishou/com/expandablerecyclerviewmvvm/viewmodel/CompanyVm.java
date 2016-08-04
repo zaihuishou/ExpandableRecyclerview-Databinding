@@ -2,7 +2,7 @@ package zaihuishou.com.expandablerecyclerviewmvvm.viewmodel;
 
 import android.databinding.ObservableField;
 
-import com.zaihuishou.databinding.expandablerecycleradapter.Observable.BaseExpandableObservable;
+import com.zaihuishou.databinding.expandablerecycleradapter.observable.BaseExpandableObservable;
 
 /**
  * 创建者: zhiqiang(谭志强)
