@@ -11,21 +11,19 @@ import com.zaihuishou.databinding.expandablerecycleradapter.viewholder.BindingVi
 import zaihuishou.com.expandablerecyclerviewmvvm.databinding.ItemCompanyBinding;
 
 /**
- * 创建者: zhiqiang(谭志强)
- * 创建时间 16-8-2.
- * 作者邮箱 tanzhiqiang@todayoffice.cn
- * 描述:
+ * * creater: zaihuishou
+ * create time: 16-8-2
+ * author email:tanzhiqiang.cathy@gmail.com
+ * desc:
  */
-
 public class CompanyViewModel extends BaseExpandableObservable {
 
     public ObservableField<String> text;
     private Context mContext;
 
     public CompanyViewModel(Context context) {
-        super();
         this.mContext = context;
-        text = new ObservableField<>("看到就按看放大镜阿飞卡我家");
+        text = new ObservableField<>();
     }
 
     @Override
@@ -34,6 +32,12 @@ public class CompanyViewModel extends BaseExpandableObservable {
         rotationArrow(binding, expanded);
     }
 
+    /**
+     * play arrow animation
+     *
+     * @param binding
+     * @param expanded
+     */
     private void rotationArrow(ItemCompanyBinding binding, boolean expanded) {
         float start, target;
         if (expanded) {
@@ -49,9 +53,7 @@ public class CompanyViewModel extends BaseExpandableObservable {
     }
 
     public void setText(String s) {
-        if (!this.text.get().equals(s)) {
-            this.text.set(s);
-        }
+        this.text.set(s);
     }
 
     public void onCompanyClick() {

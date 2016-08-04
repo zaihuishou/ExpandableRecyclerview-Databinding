@@ -4,10 +4,10 @@ import android.databinding.BaseObservable;
 import android.databinding.ObservableField;
 
 /**
- * 创建者: zhiqiang(谭志强)
- * 创建时间 16-8-4.
- * 作者邮箱 tanzhiqiang@todayoffice.cn
- * 描述:
+ * * creater: zaihuishou
+ * create time: 16-8-2
+ * author email:tanzhiqiang.cathy@gmail.com
+ * desc:
  */
 
 public class EmployeeViewModel extends BaseObservable {

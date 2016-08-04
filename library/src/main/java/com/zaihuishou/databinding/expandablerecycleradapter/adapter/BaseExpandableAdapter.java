@@ -145,6 +145,50 @@ public abstract class BaseExpandableAdapter extends RecyclerView.Adapter<Binding
     }
 
     /**
+     * Collapses all parents in the list.
+     */
+    public void collapseAllParents() {
+        if (mDataList != null && !mDataList.isEmpty()) {
+            ArrayList<Object> expandableListItems = getParents(true);
+            if (expandableListItems != null && !expandableListItems.isEmpty()) {
+                final int expandedItemSize = expandableListItems.size();
+                if (expandedItemSize > 0) {
+                    for (int i = 0; i < expandedItemSize; i++) {
+                        Object o = expandableListItems.get(i);
+                        int indexOf = mDataList.indexOf(o);
+                        if (indexOf >= 0)
+                            collapseListItem(indexOf, (BaseExpandableObservable) o, false);
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * @param isExpanded
+     * @return return all expanded items
+     */
+    @NonNull
+    private ArrayList<Object> getParents(boolean isExpanded) {
+        final int size = mDataList.size();
+        ArrayList<Object> expandableListItems = new ArrayList<>();
+        for (int i = 0; i < size; i++) {
+            Object o = mDataList.get(i);
+            if (o instanceof BaseExpandableObservable) {
+                BaseExpandableObservable expandableListItem = (BaseExpandableObservable) o;
+                if (isExpanded) {
+                    if (expandableListItem.isExpand.get())
+                        expandableListItems.add(o);
+                } else {
+                    if (!expandableListItem.isExpand.get())
+                        expandableListItems.add(o);
+                }
+            }
+        }
+        return expandableListItems;
+    }
+
+    /**
      * Gets the number of expanded child list items before the specified position.
      *
      * @param position The index before which to return the number of expanded

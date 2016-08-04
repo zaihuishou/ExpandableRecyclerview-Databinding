@@ -48,7 +48,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onFabClick(View view) {
-
+        if (mAdapter != null) {
+            mAdapter.collapseAllParents();
+        }
     }
 
     private void initRecyclerView() {
@@ -87,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
                     return zaihuishou.com.expandablerecyclerviewmvvm.BR.companyvm;
                 else if (o instanceof DepartmentViewModel)
                     return zaihuishou.com.expandablerecyclerviewmvvm.BR.vm;
-                else if(o instanceof EmployeeViewModel)
+                else if (o instanceof EmployeeViewModel)
                     return BR.employeevm;
                 return -1;
             }
