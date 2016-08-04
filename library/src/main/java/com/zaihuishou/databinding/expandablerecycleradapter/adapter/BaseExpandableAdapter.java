@@ -59,6 +59,64 @@ public abstract class BaseExpandableAdapter extends RecyclerView.Adapter<Binding
         mRecyclerViews.remove(recyclerView);
     }
 
+    /**
+     * update all item
+     *
+     * @param newDataList thw new data list
+     */
+    public void updateData(@NonNull List<Object> newDataList) {
+        if (newDataList != null && !newDataList.isEmpty()) {
+            mDataList = newDataList;
+            notifyDataSetChanged();
+        }
+    }
+
+    /**
+     * update an exit item
+     *
+     * @param position
+     * @param o
+     */
+    public void updateItem(int position, Object o) {
+        if (!isDataListEmpty() && position >= 0 && position < mDataList.size()) {
+            mDataList.set(position, o);
+            notifyItemChanged(position);
+        }
+    }
+
+    /**
+     * inserted an item to position
+     *
+     * @param position the item will be add to position
+     * @param o        item object
+     */
+
+    public void addItem(int position, Object o) {
+        if (!isDataListEmpty() && position >= 0 && position <= mDataList.size()) {
+            mDataList.add(position, o);
+            notifyItemInserted(position);
+        }
+    }
+
+    /**
+     * delete an item by position
+     *
+     * @param position
+     */
+    public void deleteItem(int position) {
+        if (!isDataListEmpty() && position >= 0 && position < mDataList.size()) {
+            mDataList.remove(position);
+            notifyItemRemoved(position);
+        }
+    }
+
+    /**
+     * @return {@link #mDataList} is empty
+     */
+    private boolean isDataListEmpty() {
+        return (mDataList == null || mDataList.isEmpty()) ? true : false;
+    }
+
     @Override
     public void onItemListCollapsed(BaseExpandableObservable baseExpandableObservable) {
         int indexOf = mDataList.indexOf(baseExpandableObservable);

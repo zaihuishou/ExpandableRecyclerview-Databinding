@@ -33,20 +33,59 @@
 
         </android.support.design.widget.AppBarLayout>
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/list_data"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="?android:actionBarSize"/>
+            android:layout_marginTop="?android:actionBarSize"
+            android:background="@android:color/white"
+            android:orientation="vertical"
+            >
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_margin="@dimen/fab_margin"
-            android:onClick="onFabClick"
-            app:srcCompat="@android:drawable/ic_dialog_dialer"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:orientation="horizontal"
+                >
 
+                <TextView
+                    style="@style/MyMenuBtn"
+                    android:onClick="add"
+                    android:text="Add"
+                    />
+
+                <TextView
+                    style="@style/MyMenuBtn"
+                    android:onClick="delete"
+                    android:text="Delete"
+                    />
+
+                <TextView
+                    style="@style/MyMenuBtn"
+                    android:onClick="update"
+                    android:text="Update"
+                    />
+
+                <TextView
+                    style="@style/MyMenuBtn"
+                    android:onClick="collapseAll"
+                    android:text="CollapseAll"
+                    />
+            </LinearLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/list_data"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                />
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:layout_margin="@dimen/fab_margin"
+                android:onClick="onFabClick"
+                app:srcCompat="@android:drawable/ic_dialog_dialer"/>
+        </LinearLayout>
     </android.support.design.widget.CoordinatorLayout>
 </layout>

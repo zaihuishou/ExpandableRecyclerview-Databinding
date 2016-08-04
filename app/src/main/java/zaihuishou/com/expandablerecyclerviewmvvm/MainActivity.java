@@ -49,8 +49,49 @@ public class MainActivity extends AppCompatActivity {
 
     public void onFabClick(View view) {
         if (mAdapter != null) {
-            mAdapter.collapseAllParents();
+            /**
+             * collapse all item
+             */
+//            mAdapter.collapseAllParents();
+
+            /**
+             * add an item
+             */
+            CompanyViewModel addCompanyViewModel = new CompanyViewModel(this);
+            addCompanyViewModel.setText("Add Company");
+            mAdapter.addItem(mAdapter.getDataList().size(), addCompanyViewModel);
         }
+    }
+
+    public void add(View view) {
+        /**
+         * add an item
+         */
+        CompanyViewModel addCompanyViewModel = new CompanyViewModel(this);
+        addCompanyViewModel.setText("Add Company");
+        mAdapter.addItem(mAdapter.getDataList().size(), addCompanyViewModel);
+    }
+
+    public void delete(View view) {
+        int size = mAdapter.getDataList().size();
+        mAdapter.deleteItem(size - 1);
+    }
+
+    public void update(View view) {
+        Object o = mAdapter.getDataList().get(0);
+        if (o instanceof CompanyViewModel) {
+            CompanyViewModel companyViewModel = (CompanyViewModel) o;
+            companyViewModel.setText("Update Company:" + System.currentTimeMillis() / 1000);
+            mAdapter.updateItem(0, companyViewModel);
+        }
+
+    }
+
+    public void collapseAll(View view) {
+        /**
+         * collapse all item
+         */
+        mAdapter.collapseAllParents();
     }
 
     private void initRecyclerView() {
