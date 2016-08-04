@@ -5,7 +5,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
@@ -16,8 +15,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import zaihuishou.com.expandablerecyclerviewmvvm.databinding.ActivityMainBinding;
-import zaihuishou.com.expandablerecyclerviewmvvm.viewmodel.CompanyVm;
-import zaihuishou.com.expandablerecyclerviewmvvm.viewmodel.Department;
+import zaihuishou.com.expandablerecyclerviewmvvm.viewmodel.CompanyViewModel;
+import zaihuishou.com.expandablerecyclerviewmvvm.viewmodel.DepartmentViewModel;
+import zaihuishou.com.expandablerecyclerviewmvvm.viewmodel.EmployeeViewModel;
 import zaihuishou.com.expandablerecyclerviewmvvm.viewmodel.MainViewModel;
 
 /**
@@ -31,7 +31,11 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding mainBinding;
     private MainViewModel mMainViewModel;
     private BaseExpandableAdapter mAdapter;
-    private List<Object> mList;
+    private List<Object> mDataList;
+
+    private final static int COMPANY = 1;
+    private final static int DEPARTMENT = 2;
+    private final static int EMPLOYEE = 3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,61 +44,53 @@ public class MainActivity extends AppCompatActivity {
         mMainViewModel = new MainViewModel();
         mainBinding.setVm(mMainViewModel);
         setSupportActionBar(mainBinding.toolbar);
-        mainBinding.fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
         initRecyclerView();
     }
 
+    public void onFabClick(View view) {
+
+    }
+
     private void initRecyclerView() {
-        mList = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            if (i % 2 == 0) {
-                CompanyVm companyVm = new CompanyVm(this);
-                companyVm.setText("公司:" + i + "肯定房价啊矿大积分发");
-                companyVm.mChildList.add(new Department("dfdafdafadf"));
-                mList.add(companyVm);
-            } else {
-                Department department = new Department();
-                department.setName("部门" + i + "231141445");
-                mList.add(department);
-            }
-        }
-        mAdapter = new BaseExpandableAdapter(this, mList) {
+        mDataList = new ArrayList<>();
+        createCompany();
+
+        mAdapter = new BaseExpandableAdapter(this, mDataList) {
             @NonNull
             @Override
             public int getItemLayout(int type) {
                 switch (type) {
-                    case 1:
+                    case COMPANY:
                         return R.layout.item_company;
-                    case 2:
+                    case DEPARTMENT:
                         return R.layout.item_department;
+                    case EMPLOYEE:
+                        return R.layout.item_employee;
                 }
                 return -1;
             }
 
             @Override
             public int getItemViewType(Object t) {
-                if (t instanceof CompanyVm)
-                    return 1;
-                if (t instanceof Department)
-                    return 2;
+                if (t instanceof CompanyViewModel)
+                    return COMPANY;
+                if (t instanceof DepartmentViewModel)
+                    return DEPARTMENT;
+                if (t instanceof EmployeeViewModel)
+                    return EMPLOYEE;
                 return super.getItemViewType(t);
             }
 
             @Override
             public int getVariable(Object o, int index) {
-                if (o instanceof CompanyVm)
+                if (o instanceof CompanyViewModel)
                     return zaihuishou.com.expandablerecyclerviewmvvm.BR.companyvm;
-                else if (o instanceof Department)
+                else if (o instanceof DepartmentViewModel)
                     return zaihuishou.com.expandablerecyclerviewmvvm.BR.vm;
+                else if(o instanceof EmployeeViewModel)
+                    return BR.employeevm;
                 return -1;
             }
-
 
         };
         mainBinding.listData.setAdapter(mAdapter);
@@ -109,4 +105,24 @@ public class MainActivity extends AppCompatActivity {
                 0, getResources().getDimensionPixelSize(R.dimen.divider)));
     }
 
+    private void createCompany() {
+        for (int i = 0; i < 2; i++) {
+            CompanyViewModel companyVm = new CompanyViewModel(this);
+            companyVm.setText(i == 0 ? "Google" : "Apple");
+            createDepartment(companyVm);
+            mDataList.add(companyVm);
+        }
+    }
+
+    private void createDepartment(CompanyViewModel companyVm) {
+        for (int i = 0; i < 3; i++) {
+            DepartmentViewModel departmentViewModel = new DepartmentViewModel("DepartmentViewModel：" + i);
+            if (i == 0) {
+                for (int j = 0; j < 3; j++) {
+                    departmentViewModel.getChildList().add(new EmployeeViewModel("Employee：" + j));
+                }
+            }
+            companyVm.mChildList.add(departmentViewModel);
+        }
+    }
 }

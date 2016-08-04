@@ -4,6 +4,8 @@ import android.databinding.BaseObservable;
 import android.databinding.ObservableArrayList;
 import android.databinding.ObservableBoolean;
 
+import com.zaihuishou.databinding.expandablerecycleradapter.viewholder.BindingViewHolder;
+
 import java.util.List;
 
 /**
@@ -30,7 +32,9 @@ public abstract class BaseExpandableObservable extends BaseObservable {
         isExpand = new ObservableBoolean(false);
     }
 
-    public abstract ObservableArrayList<Object> getChildList();
+    public ObservableArrayList<Object> getChildList() {
+        return mChildList;
+    }
 
     public void setChildList(List<Object> childList) {
         mChildList.addAll(childList);
@@ -81,6 +85,7 @@ public abstract class BaseExpandableObservable extends BaseObservable {
      *
      * @param expanded true if view is expanded before expansion is toggled,
      *                 false if not
+     * @param index    the operate item position
      */
-    public abstract void onExpansionToggled(boolean expanded);
+    public abstract void onExpansionToggled(BindingViewHolder bindingViewHolder, int index, boolean expanded);
 }

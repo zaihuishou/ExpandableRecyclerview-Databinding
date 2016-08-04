@@ -9,12 +9,12 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.zaihuishou.databinding.expandablerecycleradapter.observable.BaseExpandableObservable;
 import com.zaihuishou.databinding.expandablerecycleradapter.util.AdapterItemUtil;
 import com.zaihuishou.databinding.expandablerecycleradapter.viewholder.BindingViewHolder;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -38,18 +38,31 @@ public abstract class BaseExpandableAdapter extends RecyclerView.Adapter<Binding
     private LayoutInflater mLayoutInflater;
 
     private Context mContext;
+    private ArrayList<RecyclerView> mRecyclerViews;
 
     public BaseExpandableAdapter(Context context, List<Object> dataList) {
         this.mContext = context;
         mDataList = dataList;
+        mRecyclerViews = new ArrayList<>();
         mLayoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    }
+
+    @Override
+    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
+        super.onAttachedToRecyclerView(recyclerView);
+        mRecyclerViews.add(recyclerView);
+    }
+
+    @Override
+    public void onDetachedFromRecyclerView(RecyclerView recyclerView) {
+        super.onDetachedFromRecyclerView(recyclerView);
+        mRecyclerViews.remove(recyclerView);
     }
 
     @Override
     public void onItemListCollapsed(BaseExpandableObservable baseExpandableObservable) {
         int indexOf = mDataList.indexOf(baseExpandableObservable);
         collapseListItem(indexOf, baseExpandableObservable, true);
-        Toast.makeText(mContext, "onItemListCollapsed：" + indexOf, Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -80,7 +93,9 @@ public abstract class BaseExpandableAdapter extends RecyclerView.Adapter<Binding
             if (parentIndex != mDataList.size() - 1)
                 notifyItemRangeChanged(positionStart, mDataList.size() - positionStart);
             baseExpandableObservable.setIsExpand(true);
-            baseExpandableObservable.onExpansionToggled(true);
+
+            BindingViewHolder viewHolderForAdapterPosition = (BindingViewHolder) mRecyclerViews.get(0).findViewHolderForAdapterPosition(parentIndex);
+            baseExpandableObservable.onExpansionToggled(viewHolderForAdapterPosition, parentIndex, true);
             if (expansionTriggeredByListItemClick && mExpandCollapseListener != null) {
                 mExpandCollapseListener.onListItemExpanded(parentIndex);
             }
@@ -116,7 +131,9 @@ public abstract class BaseExpandableAdapter extends RecyclerView.Adapter<Binding
 
                 notifyItemRangeRemoved(parentIndex + 1, childListItemCount);
                 baseExpandableObservable.setIsExpand(false);
-                baseExpandableObservable.onExpansionToggled(false);
+
+                BindingViewHolder viewHolderForAdapterPosition = (BindingViewHolder) mRecyclerViews.get(0).findViewHolderForAdapterPosition(parentIndex);
+                baseExpandableObservable.onExpansionToggled(viewHolderForAdapterPosition, parentIndex, false);
                 notifyItemRangeChanged(parentIndex + 1, mDataList.size() - parentIndex - 1);
             }
 

@@ -7,7 +7,7 @@ import android.support.v7.widget.RecyclerView;
  * * creater: zaihuishou
  * create time: 16-8-2
  * author email:tanzhiqiang.cathy@gmail.com
- * desc:
+ * desc:base BindingViewHolder
  */
 
 public class BindingViewHolder<T extends ViewDataBinding> extends RecyclerView.ViewHolder {

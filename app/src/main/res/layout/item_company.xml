@@ -7,19 +7,37 @@
 
         <variable
             name="companyvm"
-            type="zaihuishou.com.expandablerecyclerviewmvvm.viewmodel.CompanyVm"/>
+            type="zaihuishou.com.expandablerecyclerviewmvvm.viewmodel.CompanyViewModel"/>
 
     </data>
 
-    <TextView
-        android:id="@+id/name"
+    <RelativeLayout
+        style="@style/ItemBg"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:gravity="center_vertical"
-        android:onClick="@{()->companyvm.onTextClick()}"
-        android:orientation="vertical"
-        android:paddingLeft="16dp"
-        android:text="@{companyvm.text}">
+        android:onClick="@{()->companyvm.onCompanyClick()}">
 
-    </TextView>
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16dp"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:paddingLeft="16dp"
+            android:text="@{companyvm.text}">
+        </TextView>
+
+        <ImageView
+            android:id="@+id/arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="16dp"
+            android:src="@mipmap/arrow_down"/>
+
+    </RelativeLayout>
 </layout>

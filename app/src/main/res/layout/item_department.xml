@@ -7,18 +7,37 @@
 
         <variable
             name="vm"
-            type="zaihuishou.com.expandablerecyclerviewmvvm.viewmodel.Department"/>
+            type="zaihuishou.com.expandablerecyclerviewmvvm.viewmodel.DepartmentViewModel"/>
 
     </data>
 
-    <TextView
-        android:id="@+id/name"
+    <RelativeLayout
+        style="@style/ItemBg"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:gravity="center_vertical"
-        android:orientation="vertical"
-        android:paddingLeft="16dp"
-        android:text="@{vm.name}">
+        android:onClick="@{()->vm.onDepartmentClick()}">
 
-    </TextView>
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="26dp"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:paddingLeft="16dp"
+            android:text="@{vm.name}">
+        </TextView>
+
+        <ImageView
+            android:id="@+id/arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="16dp"
+            android:src="@mipmap/arrow_down"/>
+
+    </RelativeLayout>
 </layout>
