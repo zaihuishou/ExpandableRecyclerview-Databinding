@@ -75,27 +75,6 @@ public class MainActivity extends AppCompatActivity {
                 }
                 return -1;
             }
-//
-//            @Override
-//            public void onBindItemViewHolder(BindingViewHolder holder, Object o, int index) {
-//                if (o instanceof CompanyVm) {
-//                    CompanyVm companyVm = (CompanyVm) o;
-//                    holder.getBinding().setVariable(zaihuishou.com.expandablerecyclerviewmvvm.BR.vm, companyVm);
-//                } else if (o instanceof Department) {
-//                    Department department = (Department) o;
-//                    holder.getBinding().setVariable(zaihuishou.com.expandablerecyclerviewmvvm.BR.vm, department);
-//                }
-//                holder.getBinding().executePendingBindings();
-//            }
-
-            @Override
-            public int getVariable(Object o, int index) {
-                if (o instanceof CompanyVm)
-                    return BR.companyvm;
-                else if(o instanceof Department)
-                    return BR.vm;
-                return -1;
-            }
 
             @Override
             public int getItemViewType(Object t) {
@@ -105,6 +84,17 @@ public class MainActivity extends AppCompatActivity {
                     return 2;
                 return super.getItemViewType(t);
             }
+
+            @Override
+            public int getVariable(Object o, int index) {
+                if (o instanceof CompanyVm)
+                    return zaihuishou.com.expandablerecyclerviewmvvm.BR.companyvm;
+                else if (o instanceof Department)
+                    return zaihuishou.com.expandablerecyclerviewmvvm.BR.vm;
+                return -1;
+            }
+
+
         };
         mainBinding.listData.setAdapter(mAdapter);
         mainBinding.listData.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
