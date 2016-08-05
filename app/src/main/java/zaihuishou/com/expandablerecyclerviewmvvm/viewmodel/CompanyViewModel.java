@@ -14,7 +14,7 @@ import zaihuishou.com.expandablerecyclerviewmvvm.databinding.ItemCompanyBinding;
  * * creater: zaihuishou
  * create time: 16-8-2
  * author email:tanzhiqiang.cathy@gmail.com
- * desc:
+ * desc: company item Observable
  */
 public class CompanyViewModel extends BaseExpandableObservable {
 

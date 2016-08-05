@@ -151,9 +151,10 @@ public abstract class BaseExpandableAdapter extends RecyclerView.Adapter<Binding
             if (parentIndex != mDataList.size() - 1)
                 notifyItemRangeChanged(positionStart, mDataList.size() - positionStart);
             baseExpandableObservable.setIsExpand(true);
-
-            BindingViewHolder viewHolderForAdapterPosition = (BindingViewHolder) mRecyclerViews.get(0).findViewHolderForAdapterPosition(parentIndex);
-            baseExpandableObservable.onExpansionToggled(viewHolderForAdapterPosition, parentIndex, true);
+            if (!mRecyclerViews.isEmpty()) {
+                BindingViewHolder viewHolderForAdapterPosition = (BindingViewHolder) mRecyclerViews.get(0).findViewHolderForAdapterPosition(parentIndex);
+                baseExpandableObservable.onExpansionToggled(viewHolderForAdapterPosition, parentIndex, true);
+            }
             if (expansionTriggeredByListItemClick && mExpandCollapseListener != null) {
                 mExpandCollapseListener.onListItemExpanded(parentIndex);
             }
@@ -166,6 +167,7 @@ public abstract class BaseExpandableAdapter extends RecyclerView.Adapter<Binding
      * @param parentIndex                      item index
      * @param collapseTriggeredByListItemClick
      */
+
     private void collapseListItem(int parentIndex, BaseExpandableObservable baseExpandableObservable, boolean collapseTriggeredByListItemClick) {
         if (baseExpandableObservable.isExpand.get()) {
             ObservableArrayList<Object> childItemList = baseExpandableObservable.getChildList();
@@ -189,9 +191,10 @@ public abstract class BaseExpandableAdapter extends RecyclerView.Adapter<Binding
 
                 notifyItemRangeRemoved(parentIndex + 1, childListItemCount);
                 baseExpandableObservable.setIsExpand(false);
-
-                BindingViewHolder viewHolderForAdapterPosition = (BindingViewHolder) mRecyclerViews.get(0).findViewHolderForAdapterPosition(parentIndex);
-                baseExpandableObservable.onExpansionToggled(viewHolderForAdapterPosition, parentIndex, false);
+                if (!mRecyclerViews.isEmpty()) {
+                    BindingViewHolder viewHolderForAdapterPosition = (BindingViewHolder) mRecyclerViews.get(0).findViewHolderForAdapterPosition(parentIndex);
+                    baseExpandableObservable.onExpansionToggled(viewHolderForAdapterPosition, parentIndex, false);
+                }
                 notifyItemRangeChanged(parentIndex + 1, mDataList.size() - parentIndex - 1);
             }
 
@@ -320,6 +323,11 @@ public abstract class BaseExpandableAdapter extends RecyclerView.Adapter<Binding
         }
     }
 
+    /**
+     * @param o     item object
+     * @param index item index
+     * @return item BR type
+     */
     public abstract int getVariable(Object o, int index);
 
     /**

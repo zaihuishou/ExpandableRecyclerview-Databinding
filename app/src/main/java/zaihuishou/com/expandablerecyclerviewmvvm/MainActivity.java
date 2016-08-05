@@ -48,19 +48,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onFabClick(View view) {
-        if (mAdapter != null) {
-            /**
-             * collapse all item
-             */
-//            mAdapter.collapseAllParents();
 
-            /**
-             * add an item
-             */
-            CompanyViewModel addCompanyViewModel = new CompanyViewModel(this);
-            addCompanyViewModel.setText("Add Company");
-            mAdapter.addItem(mAdapter.getDataList().size(), addCompanyViewModel);
-        }
     }
 
     public void add(View view) {
