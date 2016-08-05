@@ -1,2 +1,3 @@
-# ExpandableRecyclerview-Databinding
-ExpandableRecyclerview Databinding implemention
+##ExpandableRecyclerview-Databinding
+
+  An ExpandableRecyclerview for Databinding
