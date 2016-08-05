@@ -15,37 +15,12 @@ import android.view.View;
  */
 public class DividerItemDecoration extends RecyclerView.ItemDecoration {
 
-    /**
-     * 分割线
-     */
     protected Drawable dividerDrawable;
-    /**
-     * 分割线距离左边或者顶部的边距
-     */
     protected int mLeftOrTopPadding;
-    /**
-     * 分割线距离右边后者下边的边距
-     */
     protected int mRightOrBottomPadding;
 
-    /**
-     * 分割线高度
-     */
     protected int mHeight;
 
-
-    /**
-     * 全参构造器
-     *
-     * @param divider              <p>分割线</p>
-     * @param leftOrTopPadding     <p>分割线距离左边或者顶部的边距，不传默认为0 <br/> 当布局管理器用的是
-     *                             {@link LinearLayoutManager#VERTICAL}时候为左边边距,
-     *                             {@link LinearLayoutManager#HORIZONTAL}为顶部边距</p>
-     * @param rightOrBottomPadding <p>分割线距离右边后者下边的边距,不传默认为0<br/>当布局管理器用的是
-     *                             {@link LinearLayoutManager#VERTICAL}时候为右边边距,
-     *                             {@link LinearLayoutManager#HORIZONTAL}为下边边距</p>
-     * @param height               <p>分割线的高度,默认为分割线资源文件高度
-     */
     public DividerItemDecoration(Drawable divider, int leftOrTopPadding, int rightOrBottomPadding, int height) {
         dividerDrawable = divider;
         this.mLeftOrTopPadding = leftOrTopPadding;
@@ -53,10 +28,6 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
         this.mHeight = height;
     }
 
-    /**
-     * @param divider <p>分割线</p>
-     * @param height  <p>分割线的高度
-     */
     public DividerItemDecoration(Drawable divider, int height) {
         dividerDrawable = divider;
         this.mLeftOrTopPadding = 0;
@@ -76,11 +47,10 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
         if (dividerDrawable == null) {
             return;
         }
-        //如果是第一个item，不需要divider，所以直接return
+        //if first ,return
         if (parent.getChildLayoutPosition(view) < 1) {
             return;
         }
-        //相当于给itemView设置margin，给divider预留空间
         int layoutOrientation = getOrientation(parent);
         if (layoutOrientation == LinearLayoutManager.VERTICAL) {
             outRect.top = mHeight;
@@ -101,11 +71,10 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
         int firstVisiblePosition = layoutManager.findFirstVisibleItemPosition();
         int orientation = getOrientation(layoutManager);
         int childCount = parent.getChildCount();
-        if (orientation == LinearLayoutManager.VERTICAL) {//RecyclerView  为垂直滚动的时候
-            int left = parent.getPaddingLeft() + mLeftOrTopPadding;  //分割线左边位置： RecyclerView的paddingLeft 加上 自定义的 分割线左边距离
-            int right = parent.getWidth() - parent.getPaddingRight() - mRightOrBottomPadding;  //分割线右边边位置： RecyclerView的宽度减去paddingRight 再减去 自定义的 分割线右边距离
+        if (orientation == LinearLayoutManager.VERTICAL) {
+            int left = parent.getPaddingLeft() + mLeftOrTopPadding;
+            int right = parent.getWidth() - parent.getPaddingRight() - mRightOrBottomPadding;
             for (int i = 0; i < childCount; i++) {
-                //判断第一个item的下标是不是0，是则return，不需要draw divider_1dp
                 if (i == 0 && firstVisiblePosition == 0) {
                     continue;
                 }
