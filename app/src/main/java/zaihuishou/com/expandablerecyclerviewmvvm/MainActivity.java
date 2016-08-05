@@ -147,7 +147,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void createDepartment(CompanyViewModel companyVm) {
         for (int i = 0; i < 3; i++) {
-            DepartmentViewModel departmentViewModel = new DepartmentViewModel("DepartmentViewModel：" + i);
+            DepartmentViewModel departmentViewModel = new DepartmentViewModel("Department：" + i);
             if (i == 0) {
                 for (int j = 0; j < 3; j++) {
                     departmentViewModel.getChildList().add(new EmployeeViewModel("Employee：" + j));
