@@ -8,7 +8,7 @@
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-ExpandableRecyclerview--Databinding-green.svg?style=true)](https://android-arsenal.com/details/1/4074)
 
 ##Gradle
-compile 'com.zaihuishou:expandablerecycleradapter-databinding:1.0
+compile 'com.zaihuishou:expandablerecycleradapter-databinding:1.0.0'
 
 ##Maven
 ```
