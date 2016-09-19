@@ -119,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
                 else if (o instanceof DepartmentViewModel)
                     return zaihuishou.com.expandablerecyclerviewmvvm.BR.vm;
                 else if (o instanceof EmployeeViewModel)
-                    return BR.employeevm;
+                    return zaihuishou.com.expandablerecyclerviewmvvm.BR.employeevm;
                 return -1;
             }
 
@@ -150,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
             DepartmentViewModel departmentViewModel = new DepartmentViewModel("Department：" + i);
             if (i == 0) {
                 for (int j = 0; j < 3; j++) {
-                    departmentViewModel.getChildList().add(new EmployeeViewModel("Employee：" + j));
+                    departmentViewModel.getChildList().add(new EmployeeViewModel(this, "Employee：" + j));
                 }
             }
             companyVm.mChildList.add(departmentViewModel);

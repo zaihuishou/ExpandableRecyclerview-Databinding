@@ -15,6 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:gravity="center_vertical"
+        android:onClick="@{(view)->employeevm.onItemClicked(view)}"
         android:paddingLeft="56dp"
         android:text="@{employeevm.name}"
         />
